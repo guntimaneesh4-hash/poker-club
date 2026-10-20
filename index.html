@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07110e">
+  <title>Poker Club | Private Texas Hold'em</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; color: #f5f7f5;
+      background: radial-gradient(ellipse at top, #173a2c, #07110e 65%);
+      font-family: Arial, sans-serif;
+    }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 6%; border-bottom: 1px solid #294538;
+    }
+    .brand { font-size: 23px; font-weight: bold; }
+    .brand span { color: #60d99a; }
+    .tag { color: #b5c7bd; font-size: 12px; margin-top: 5px; }
+    button {
+      border: 1px solid #438761; background: #174b32; color: white;
+      border-radius: 10px; padding: 12px 17px; font-weight: bold;
+      cursor: pointer;
+    }
+    main { max-width: 1000px; margin: 45px auto; padding: 0 18px; }
+    .hero { text-align: center; margin-bottom: 35px; }
+    h1 { font-size: clamp(30px, 6vw, 50px); margin-bottom: 12px; }
+    .muted { color: #b3c3ba; line-height: 1.6; }
+    .table {
+      background: linear-gradient(135deg, #14623f, #0b3929);
+      border: 9px solid #68462e; border-radius: 180px;
+      min-height: 290px; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; text-align: center;
+      box-shadow: 0 20px 50px #0007; padding: 30px 15px;
+    }
+    .cards { font-size: 38px; letter-spacing: 7px; margin: 15px 0; }
+    .panel {
+      background: #101d18; border: 1px solid #294538;
+      border-radius: 16px; padding: 22px; margin-top: 24px;
+    }
+    input {
+      width: 100%; padding: 13px; margin: 8px 0 14px;
+      color: white; background: #09120e; border: 1px solid #355344;
+      border-radius: 9px; font-size: 16px;
+    }
+    .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 16px; }
+    .actions button { flex: 1; }
+    #notice { color: #7ee2a8; margin-top: 15px; line-height: 1.5; }
+    footer { text-align: center; color: #91a49a; font-size: 12px; padding: 30px 15px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <div class="brand">♠ POKER<span> CLUB</span></div>
+      <div class="tag">YOUR FRIENDS. YOUR TABLE.</div>
+    </div>
+    <span>🟢 Virtual chips only</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Your private poker night.</h1>
+      <p class="muted">A place for friends to meet, play and compete.</p>
+    </section>
+
+    <section class="table">
+      <div style="font-size:13px;letter-spacing:3px">POKER CLUB TABLE</div>
+      <div class="cards">🂠 🂠</div>
+      <div>Texas Hold'em</div>
+      <p class="muted">Your next game starts here.</p>
+    </section>
+
+    <section class="panel">
+      <h2>♣ Join your friends</h2>
+      <p class="muted">Choose a player name and enter your private room code.</p>
+      <label for="player">Your player name</label>
+      <input id="player" maxlength="20" placeholder="Enter your name">
+      <label for="room">Private room code</label>
+      <input id="room" maxlength="20" placeholder="e.g. FRIDAY7">
+      <div class="actions">
+        <button onclick="joinRoom()">Join a table →</button>
+        <button onclick="createRoom()">Create a room +</button>
+      </div>
+      <div id="notice" role="status"></div>
+    </section>
+  </main>
+
+  <footer>POKER CLUB · Play for fun with virtual chips only.</footer>
+
+  <script>
+    function joinRoom() {
+      const name = document.getElementById('player').value.trim();
+      const room = document.getElementById('room').value.trim();
+      const notice = document.getElementById('notice');
+      if (!name || !room) {
+        notice.textContent = 'Please enter your player name and room code.';
+        return;
+      }
+      notice.textContent = 'Welcome, ' + name +
+        '! The room entry screen is ready for the multiplayer connection step.';
+    }
+
+    function createRoom() {
+      const name = document.getElementById('player').value.trim();
+      const room = document.getElementById('room');
+      if (!name) {
+        document.getElementById('notice').textContent =
+          'Enter your player name first.';
+        return;
+      }
+      room.value = 'CLUB' + Math.random().toString(36).slice(2, 7).toUpperCase();
+      document.getElementById('notice').textContent =
+        'Room code created: ' + room.value +
+        '. Save this code to share later. Multiplayer is our next build step.';
+    }
+  </script>
+</body>
+</html>
